@@ -1,6 +1,6 @@
 package main
 
-import "scheduler/porter"
+import "go-porter/porter"
 
 func main(){
 	m := porter.GetManager(10)
