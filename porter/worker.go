@@ -3,27 +3,24 @@ package porter
 import (
 	"fmt"
 	"github.com/buger/jsonparser"
+	"time"
 )
 
-type worker struct{
+type Worker struct{
+	Id time.Time
+	Task Task
 }
 
-func (w *worker) DoTheThing(){
-	t := Task{
-		Id: 1,
-		Thing: []byte(`{"post": {"title": "New Title"}}`),
-	}
-	t.convertThing()
-}
-
-func (tk *Task) convertThing(){
-	c, _, _,err := jsonparser.Get(tk.Thing, "post")
+func (w *Worker) DoTheThing(){
+	c,err := jsonparser.GetString(w.Task.Package, "title")
 	if err != nil{
 		fmt.Println("Error:", err)
 	}
-	fmt.Println("New Title is ", c)
+
+	fmt.Printf("Task for %d is %v \n", w.Task.Id, c)
 }
 
-func (w *worker) ReportBack(){
+
+func (w *Worker) ReportBack(){
 	fmt.Println("Report Back")
 }
