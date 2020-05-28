@@ -3,6 +3,7 @@ package porter
 import (
 	"fmt"
 	"github.com/buger/jsonparser"
+	"sync"
 	"time"
 )
 
@@ -11,13 +12,15 @@ type Worker struct{
 	Task Task
 }
 
-func (w *Worker) DoTheThing(){
+func (w *Worker) DoTheThing(wg *sync.WaitGroup){
 	c,err := jsonparser.GetString(w.Task.Package, "title")
 	if err != nil{
 		fmt.Println("Error:", err)
 	}
-
+	time.Sleep(2 * time.Second)
 	fmt.Printf("Task for %d is %v \n", w.Task.Id, c)
+	wg.Done()
+	//Call back, do the next task
 }
 
 

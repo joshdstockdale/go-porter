@@ -37,5 +37,5 @@ func main() {
 		Package:   []byte(`{"title": "New Title 10"}`),
 	},}
 
-	porter.WakePorters(10, tks)
+	porter.WakePorters(3, tks)
 }
