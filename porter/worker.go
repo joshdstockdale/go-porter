@@ -17,8 +17,10 @@ func (w *Worker) DoTheThing(wg *sync.WaitGroup){
 	if err != nil{
 		fmt.Println("Error:", err)
 	}
+
 	time.Sleep(2 * time.Second)
 	fmt.Printf("Task for %d is %v \n", w.Task.Id, c)
+
 	wg.Done()
 	//Call back, do the next task
 }
